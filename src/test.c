@@ -11,22 +11,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "myLibrary.h"
-
-#define MAXLINES 5000 /* max #lines to be sorted */
-
 int main(void)
 {
 
-	int aNumber;
+	int sizes[] = {15, 20, 30};
 
-	printf("Please enter a number: ");
+	int *ptr = sizes;
 
-	scanf("%d", &aNumber);
+	ptr++;
 
-	printf("Yo entered %d", aNumber);
 
-	getchar();
+	printf("%d", *ptr);
 
-	return 0;
 }
