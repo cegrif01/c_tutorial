@@ -8,23 +8,24 @@
 
 //Global definitions
 
+typedef struct user {
+
+		char name[50];
+		int age;
+		char email[50];
+} User;
 
 int main(void) {
 
-	union symbol {
-		int number;
-		char letter;
-	};
+	User user;
 
-	union symbol value;
-	value.number = 25;
-	value.letter = 'm';
+	user.age = 28;
+	strcpy(user.name, "Charles");
+	strcpy(user.email, "cegrif01@gmail.com");
 
-	union symbol *ptr; //pointer to union
-	ptr = &value;
-	char myLetter = ptr->letter;
-
-	printf("Letter field: %c\n", myLetter);
+	printf("name is %s\n", user.name);
+	printf("age is %d\n", user.age);
+	printf("email is %s\n", user.email);
 
 	return EXIT_SUCCESS;
 }
