@@ -8,32 +8,58 @@
 
 //Global definitions
 
-typedef union age_union {
-	int i;
-	char y[50];
-} UserAge;
 
-typedef struct user {
+typedef struct financial_data {
 
-		char name[50];
-		UserAge age;
-		char email[50];
-} User;
+	float amount;
+	char purchase_date[10];
+	char *description;
+	char *transaction_type;
 
+} financial_data;
+
+void print_financial_data(struct financial_data *data)
+{
+	printf("amount is %.2f\n", data->amount);
+	printf("date is %s", data->purchase_date);
+	printf("description: %s", data->description);
+	printf("This is an %s transaction", data->transaction_type);
+}
+
+financial_data * take_in_user_info()
+{
+	char date[20];
+	float amount;
+	char *description = malloc(sizeof(char) * 20);
+	char *transaction_type = malloc(sizeof(char) *20);
+
+	financial_data *data = malloc(sizeof(financial_data));
+
+	printf("Enter date: ");
+	scanf("%s", &date);
+
+	printf("Enter transaction amount: ");
+	scanf("%f", &amount);
+
+	printf("Enter a description of your purchase: ");
+	scanf("%s", description);
+
+	printf("Enter expense or income: ");
+	scanf("%s", transaction_type);
+
+	data->amount = amount;
+	strcpy(data->purchase_date, date);
+	strcpy(data->description, *description);
+	strcpy(data->transaction_type, *transaction_type);
+
+	return data;
+}
 
 int main(void) {
 
-	User user;
+	financial_data *users_fin_data = take_in_user_info();
 
-	//user.age.i = 28;
-	strcpy(user.age.y, "twenty-eight");
-	strcpy(user.name, "Charles");
-	strcpy(user.email, "cegrif01@gmail.com");
-
-	printf("name is %s\n", user.name);
-	//printf("age is %d\n", user.age.i);
-	printf("age is %s\n", user.age.y);
-	printf("email is %s\n", user.email);
+	print_financial_data(users_fin_data);
 
 	return EXIT_SUCCESS;
 }
