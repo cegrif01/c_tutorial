@@ -21,17 +21,17 @@ typedef struct financial_data {
 void print_financial_data(struct financial_data *data)
 {
 	printf("amount is %.2f\n", data->amount);
-	printf("date is %s", data->purchase_date);
-	printf("description: %s", data->description);
-	printf("This is an %s transaction", data->transaction_type);
+	printf("date is %s\n", data->purchase_date);
+	printf("description: %s\n", data->description);
+	printf("This is an %s transaction\n", data->transaction_type);
 }
 
 financial_data * take_in_user_info()
 {
 	char date[20];
 	float amount;
-	char *description = malloc(sizeof(char) * 20);
-	char *transaction_type = malloc(sizeof(char) *20);
+	char *description = malloc(sizeof(char));
+	char *transaction_type = malloc(sizeof(char));
 
 	financial_data *data = malloc(sizeof(financial_data));
 
@@ -47,10 +47,13 @@ financial_data * take_in_user_info()
 	printf("Enter expense or income: ");
 	scanf("%s", transaction_type);
 
+	data->description = malloc(strlen(description) +1);
+	data->transaction_type = malloc(strlen(transaction_type) +1);
+
 	data->amount = amount;
 	strcpy(data->purchase_date, date);
-	strcpy(data->description, *description);
-	strcpy(data->transaction_type, *transaction_type);
+	strcpy(data->description, description);
+	strcpy(data->transaction_type, transaction_type);
 
 	return data;
 }
