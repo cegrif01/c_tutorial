@@ -3,66 +3,31 @@
 #include <stdlib.h>
 #include <string.h>
 
-//Constants
-//union within a struct example: http://www.wellho.net/resources/ex.php4?item=c209/tud.c
-
-//Global definitions
-
-
-typedef struct financial_data {
-
-	float amount;
-	char purchase_date[10];
-	char *description;
-	char *transaction_type;
-
-} financial_data;
-
-void print_financial_data(struct financial_data *data)
+void bubble_sort(int *list, int size_of_list)
 {
-	printf("amount is %.2f\n", data->amount);
-	printf("date is %s\n", data->purchase_date);
-	printf("description: %s\n", data->description);
-	printf("This is an %s transaction\n", data->transaction_type);
-}
+	int i, j, temp;
+	for(i=0; i<size_of_list; i++) {
+		for(j=0;  j<size_of_list-1;  j++) {
 
-financial_data * take_in_user_info()
-{
-	char date[20];
-	float amount;
-	char *description = malloc(sizeof(char));
-	char *transaction_type = malloc(sizeof(char));
+			int current = j;
+			int next = j+1;
 
-	financial_data *data = malloc(sizeof(financial_data));
-
-	printf("Enter date: ");
-	scanf("%s", &date);
-
-	printf("Enter transaction amount: ");
-	scanf("%f", &amount);
-
-	printf("Enter a description of your purchase: ");
-	scanf("%s", description);
-
-	printf("Enter expense or income: ");
-	scanf("%s", transaction_type);
-
-	data->description = malloc(strlen(description) +1);
-	data->transaction_type = malloc(strlen(transaction_type) +1);
-
-	data->amount = amount;
-	strcpy(data->purchase_date, date);
-	strcpy(data->description, description);
-	strcpy(data->transaction_type, transaction_type);
-
-	return data;
+			if(list[current] < list[next]) {
+				temp = list[current];
+				list[current] = list[next];
+				list[next] = temp;
+			}
+		}
+	}
 }
 
 int main(void) {
 
-	financial_data *users_fin_data = take_in_user_info();
+	int A[] = {3,2,1,5,6,4};
+	bubble_sort(A, 6);
 
-	print_financial_data(users_fin_data);
+	int i;
+	for(i=0;i<6;i++) { printf("%d", A[i]); }
 
 	return EXIT_SUCCESS;
 }
